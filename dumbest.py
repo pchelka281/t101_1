@@ -36,7 +36,23 @@ def update_facts(facts):
             facts_dict[fact] = True
     return facts_dict
 
+def timer(func):
+    """Таймер времени выполнения фунцкии
+        Args:
+            func (func): Функция, время работы которой требуется измерить
+        Returns:
+            String: Строка со временем выполнения
+    """
+    @functools.wraps(func)
+    def _wrapper(*args, **kwargs):
+        start = time.perf_counter()
+        result = func(*args, **kwargs)
+        runtime = time.perf_counter() - start
+        print(f"{func.__name__} took {runtime:.3f} seconds")
+        return result
+    return _wrapper
 
+@timer
 def dumbest_ai(rules_list, facts_dict):
     """Самый тупой искуственный интелект
         Args:
