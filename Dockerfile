@@ -1,5 +1,5 @@
 FROM python:3.7-slim-buster
 RUN mkdir ./code
-COPY ./src ./code
+COPY ./code ./code
 WORKDIR ./code
-CMD ["python", "./lab1.py"]
+CMD ["python", "./main.py"]
